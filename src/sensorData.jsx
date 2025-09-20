@@ -4,7 +4,8 @@ export default function useSensorData() {
   const [data, setData] = useState({
     temperature: null,
     light: null,
-    pH: null
+    pH: null,
+    oxygen: null
   });
 
   const [error, setError] = useState(null);
@@ -20,7 +21,8 @@ export default function useSensorData() {
         setData({
           temperature: result.temperature,
           light: result.light,
-          pH: result.pH
+          pH: result.ph,
+          oxygen: result.oxygen
         });
         setError(null);
       } catch (error) {
