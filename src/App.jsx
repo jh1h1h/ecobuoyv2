@@ -3,13 +3,43 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Circle } from "rc-progress";
+import useSensorData from './sensorData';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { data, error } = useSensorData();
 
   return (
     <div className="min-h-screen bg-[#DDF1FF] font-sans flex flex-col items-center p-4">
+
+                {data.temperature !== null ? `${data.temperature}` : (
+                  <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
+                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      {/* <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle> */}
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  </div>
+                )}
+
+                {data.light !== null ? `${data.light}` : (
+                  <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
+                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      {/* <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle> */}
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  </div>
+                )}
+
+                {data.pH !== null ? `${data.pH}` : (
+                  <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
+                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      {/* <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle> */}
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  </div>
+                )}
+
           {/* Header */}
           <div className="w-full flex justify-between items-center mt-2">
             <h1 className="text-xl font-bold text-[#086C76]">
@@ -47,6 +77,17 @@ function App() {
               </div>
             </div>
     
+            {/* Turbidity */}
+            <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
+              <div>
+                <h2 className="text-[#086C76] font-bold flex items-center">💧 Turbidity</h2>
+                <p className="text-sm text-[#086C76] opacity-70">Tells you how clear your water is, cloudy water may mean waste or algae.</p>
+              </div>
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#D3B53D] text-white font-bold">
+                24
+              </div>
+            </div>
+
             {/* Dissolved Oxygen */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
               <div>
