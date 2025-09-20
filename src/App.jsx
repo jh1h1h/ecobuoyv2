@@ -11,6 +11,7 @@ function App() {
   const { data, error } = useSensorData();
 
   return (
+<<<<<<< Updated upstream
     <div className="min-h-screen bg-[#DDF1FF] font-sans flex flex-col items-center p-4">
 
                 {data.temperature !== null ? `${data.temperature}` : (
@@ -40,12 +41,15 @@ function App() {
                   </div>
                 )}
 
+=======
+    <div className="min-h-screen bg-[#DDF1FF] font-mont flex flex-col items-center p-4">
+>>>>>>> Stashed changes
           {/* Header */}
           <div className="w-full flex justify-between items-center mt-2">
-            <h1 className="text-xl font-bold text-[#086C76]">
+            <div className="text-lg text-left font-bold text-[#086C76]">
               Hey Jenny! <span className="inline-block">👋</span>
-              <p className="text-sm font-normal">Let’s guard your fish!</p>
-            </h1>
+              <p className="text-xs font-normal">Let’s guard your fish!</p>
+            </div>
             <img
               src="https://i.pravatar.cc/40"
               alt="profile"
@@ -65,14 +69,19 @@ function App() {
           </div>
     
           {/* Cards */}
-          <div className="mt-6 space-y-4 w-full">
+          <div className="text-left mt-6 space-y-4 w-full">
             {/* Temperature */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
-              <div>
-                <h2 className="text-[#086C76] font-bold flex items-center">🌡 Temperature</h2>
-                <p className="text-sm text-[#086C76] opacity-70">Keeps track of water warmth, too hot or cold can stress your fish.</p>
+              <div className="flex items-start space-x-3">
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">🌡</div>
+                <div>
+                  <h2 className="text-[#086C76] font-bold">Temperature</h2>
+                  <p className="text-xs text-[#086C76] opacity-70 leading-snug">
+                    Keeps track of water warmth, too hot or cold can stress your fish.
+                  </p>
+                </div>
               </div>
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#4AC354] text-white font-bold">
+              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold">
                 24
               </div>
             </div>
@@ -90,40 +99,47 @@ function App() {
 
             {/* Dissolved Oxygen */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
-              <div>
-                <h2 className="text-[#086C76] font-bold flex items-center">💧 Dissolved Oxygen</h2>
-                <p className="text-sm text-[#086C76] opacity-70">This tells you if your fish have enough air to breathe.</p>
+              <div className="flex items-start space-x-3">
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">💧</div>
+                <div>
+                  <h2 className="text-[#086C76] font-bold">Dissolved Oxygen</h2>
+                  <p className="text-xs text-[#086C76] opacity-70 leading-snug">
+                    This tells you if your fish have enough air to breathe.
+                  </p>
+                </div>
               </div>
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#D3B53D] text-white font-bold">
+              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#D3B53D] text-white font-bold">
                 5.0
               </div>
             </div>
-    
+
             {/* pH Levels */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
-              <div>
-                <h2 className="text-[#086C76] font-bold flex items-center">🧪 pH Levels</h2>
-                <p className="text-sm text-[#086C76] opacity-70">Monitors water acidity to keep your fish safe.</p>
+              <div className="flex items-start space-x-3">
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">🧪</div>
+                <div>
+                  <h2 className="text-[#086C76] font-bold">pH Levels</h2>
+                  <p className="text-xs text-[#086C76] opacity-70 leading-snug">
+                    Monitors water acidity to keep your fish safe.
+                  </p>
+                </div>
               </div>
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#C34A4A] text-white font-bold">
+              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#C34A4A] text-white font-bold">
                 6.0
               </div>
             </div>
           </div>
     
           {/* Bottom Navigation */}
-          <div className="fixed bottom-4 bg-white rounded-2xl shadow-md w-[90%] max-w-md flex justify-around py-3">
-            <button className="flex flex-col items-center text-[#086C76]">
-              {/* <Home className="w-6 h-6" /> */}
-              <span className="text-sm">Home</span>
+          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-[#E6F9FD] w-[90%] max-w-md h-16 rounded-full shadow-md flex items-center justify-around">
+            <button className="text-teal-700 hover:text-teal-900">
+              <Home size={28} strokeWidth={2.5} />
             </button>
-            <button className="flex flex-col items-center text-[#086C76]">
-              {/* <Trends className="w-6 h-6" /> */}
-              <span className="text-sm">Trends</span>
+            <button className="text-teal-700 hover:text-teal-900">
+              <BarChart2 size={28} strokeWidth={2.5} />
             </button>
-            <button className="flex flex-col items-center text-[#086C76]">
-              {/* <Settings className="w-6 h-6" /> */}
-              <span className="text-sm">Settings</span>
+            <button className="text-teal-700 hover:text-teal-900">
+              <Settings size={28} strokeWidth={2.5} />
             </button>
           </div>
         </div>
