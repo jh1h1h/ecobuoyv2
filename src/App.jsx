@@ -6,10 +6,32 @@ import { Circle } from "rc-progress";
 import useSensorData from './sensorData';
 import { Home2, Chart, Settings } from '@solar-icons/react';
 
+function getTempColor(type, value) {
+  if (value >= 19 && value <= 20) return "bg-green-500"; // optimal
+  if (value >= 18 && value <= 21) return "bg-yellow-500"; // warning
+  return "bg-red-500"; // out of safe range
+}
+
+function getTurbColor(type, value) {
+  if (value >= 19 && value <= 20) return "bg-green-500"; // optimal
+  if (value >= 18 && value <= 21) return "bg-yellow-500"; // warning
+  return "bg-red-500"; // out of safe range
+}
+
+function getPHColor(type, value) {
+  return value > 7 ? "bg-red-500" : "bg-green-500";
+}
+
+function getOxyColor(type, value) {
+  if (value >= 19 && value <= 20) return "bg-green-500"; // optimal
+  if (value >= 18 && value <= 21) return "bg-yellow-500"; // warning
+  return "bg-red-500"; // out of safe range
+}
 
 function App() {
   const [count, setCount] = useState(0);
   const { data, error } = useSensorData();
+  // const data = {temperature: 22, light: 21, pH: 7, oxygen: 10} // test data
 
   return (
     <div className="min-h-screen bg-[#DDF1FF] font-mont flex flex-col items-center p-4">
@@ -51,7 +73,7 @@ function App() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold">
+              <div className={`flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold ${data.temperature !== null ? getTempColor("temperature", data.temperature) : "bg-gray-400"}`}>
                 {data.temperature !== null ? `${data.temperature}` : (
                   <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
                     <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -74,7 +96,7 @@ function App() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#D3B53D] text-white font-bold">
+              <div className={`flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold ${data.light !== null ? getTurbColor("turbidity", data.light) : "bg-gray-400"}`}>
                 {data.light !== null ? `${data.light}` : (
                   <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
                     <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -97,7 +119,7 @@ function App() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#C34A4A] text-white font-bold">
+              <div className={`flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold ${data.pH !== null ? getPHColor("pH", data.pH) : "bg-gray-400"}`}>
                 {data.pH !== null ? `${data.pH}` : (
                   <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
                     <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -120,7 +142,7 @@ function App() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-[#D3B53D] text-white font-bold">
+              <div className={`flex items-center justify-center min-w-14 h-14 rounded-full bg-[#4AC354] text-white font-bold ${data.oxygen !== null ? getOxyColor("oxygen", data.oxygen) : "bg-gray-400"}`}>
                 {data.oxygen !== null ? `${data.oxygen}` : (
                   <div className="inline-flex items-center space-x-2 text-sm text-gray-500">
                     <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
