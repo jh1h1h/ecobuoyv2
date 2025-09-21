@@ -28,10 +28,37 @@ function getOxyColor(type, value) {
   return "bg-red-500"; // out of safe range
 }
 
+function getHealthScore(data){
+  var score = 0;
+  var total = 0;
+
+  var value = data.temperature;
+  if (value >= 19 && value <= 20) score += 2; // optimal
+  else if (value >= 18 && value <= 21) score += 1; // warning
+  total += 2;
+
+  value = data.light;
+  if (value >= 19 && value <= 20) score += 2; // optimal
+  else if (value >= 18 && value <= 21) score += 1; // warning
+  total += 2;
+
+  value = data.pH;
+  if (value >= 7) score += 2;
+  total += 2;
+
+  value = data.oxygen;
+  if (value >= 19 && value <= 20) score += 2; // optimal
+  else if (value >= 18 && value <= 21) score += 1; // warning
+  total += 2;
+
+  return (score/total)*100;
+}
+
 function App() {
   const [count, setCount] = useState(0);
-  // const { data, error } = useSensorData();
-  const data = {temperature: 22, light: 21, pH: 7, oxygen: 10} // test data
+  const { data, error } = useSensorData();
+  // const data = {temperature: 23, light: 23, pH: 6, oxygen: 23} // test data
+  const healthScore = getHealthScore(data);
 
   return (
     <div className="min-h-screen bg-[#DDF1FF] font-mont flex flex-col items-center p-4">
@@ -52,9 +79,9 @@ function App() {
           {/* Health Score */}
           <div className="mt-8 flex flex-col items-center">
             <div className="relative">
-              <Circle percent={86} strokeWidth={10} trailWidth={10} strokeColor="#07A9BA" trailColor="#C9E8F3" className="w-40 h-40" />
+              <Circle percent={healthScore} strokeWidth={10} trailWidth={10} strokeColor="#07A9BA" trailColor="#C9E8F3" className="w-40 h-40" />
               <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#086C76]">
-                86%
+                {Math.round(healthScore)}%
               </span>
             </div>
             <p className="mt-2 text-[#9CA3AF] font-semibold">Health Score</p>
