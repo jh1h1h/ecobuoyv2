@@ -4,7 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Circle } from "rc-progress";
 import useSensorData from './sensorData';
-import { Home2, Chart, Settings } from '@solar-icons/react';
+import { Home2, Chart, Settings, Bell } from '@solar-icons/react';
+import { Link } from "react-router-dom";
+import TempIcon from "./assets/temp.svg";
+import OxygenIcon from "./assets/oxygen.svg";
+import TurbidityIcon from "./assets/turbidity.svg";
+import PHIcon from "./assets/ph.svg";
 
 function getTempColor(type, value) {
   if (value >= 19 && value <= 20) return "bg-green-500"; // optimal
@@ -13,9 +18,9 @@ function getTempColor(type, value) {
 }
 
 function getTurbColor(type, value) {
-  if (value >= 19 && value <= 20) return "bg-green-500"; // optimal
-  if (value >= 18 && value <= 21) return "bg-yellow-500"; // warning
-  return "bg-red-500"; // out of safe range
+  if (value <= 60) return "bg-red-500"; // optimal
+  if (value <= 70) return "bg-yellow-500"; // warning
+  return "bg-green-500"; // out of safe range
 }
 
 function getPHColor(type, value) {
@@ -38,8 +43,8 @@ function getHealthScore(data){
   total += 2;
 
   value = data.light;
-  if (value >= 19 && value <= 20) score += 2; // optimal
-  else if (value >= 18 && value <= 21) score += 1; // warning
+  if (value > 80) score += 2; // optimal
+  else if (value > 70) score += 1; // warning
   total += 2;
 
   value = data.pH;
@@ -69,11 +74,14 @@ function App() {
               Hey Jenny! <span className="inline-block">👋</span>
               <p className="text-xs font-normal">Let’s guard your fish!</p>
             </div>
-            <img
+            <div className="flex items-center space-x-3">
+              <Link to="/alerts"><Bell weight={'Linear'} size={25} color='#086C76'></Bell></Link>
+              <img
               src="https://i.pravatar.cc/40"
               alt="profile"
               className="w-10 h-10 rounded-full border"
-            />
+              />
+            </div>            
           </div>
     
           {/* Health Score */}
@@ -92,7 +100,7 @@ function App() {
             {/* Temperature */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
               <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">🌡</div>
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm"><img src={TempIcon} className="w-5 h-5 text-white" /></div>
                 <div>
                   <h2 className="text-[#086C76] font-bold">Temperature</h2>
                   <p className="text-xs text-[#086C76] opacity-70 leading-snug">
@@ -115,7 +123,7 @@ function App() {
             {/* Turbidity */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
               <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">💧</div>
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm"><img src={TurbidityIcon} className="w-5 h-5 text-white" /></div>
                 <div>
                   <h2 className="text-[#086C76] font-bold">Turbidity</h2>
                   <p className="text-xs text-[#086C76] opacity-70 leading-snug">
@@ -138,7 +146,7 @@ function App() {
             {/* pH Levels */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
               <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">🧪</div>
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm"><img src={PHIcon} className="w-5 h-5 text-white" /></div>
                 <div>
                   <h2 className="text-[#086C76] font-bold">pH Levels</h2>
                   <p className="text-xs text-[#086C76] opacity-70 leading-snug">
@@ -161,7 +169,7 @@ function App() {
             {/* Dissolved Oxygen */}
             <div className="flex items-center justify-between bg-[#DCF5FD] rounded-2xl p-4 shadow">
               <div className="flex items-start space-x-3">
-                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm">💧</div>
+                <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-[#086C76] text-white text-sm"><img src={OxygenIcon} className="w-5 h-5 text-white" /></div>
                 <div>
                   <h2 className="text-[#086C76] font-bold">Dissolved Oxygen</h2>
                   <p className="text-xs text-[#086C76] opacity-70 leading-snug">
