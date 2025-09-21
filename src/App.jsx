@@ -19,7 +19,7 @@ function getTurbColor(type, value) {
 }
 
 function getPHColor(type, value) {
-  return value > 7 ? "bg-red-500" : "bg-green-500";
+  return value < 7 ? "bg-red-500" : "bg-green-500";
 }
 
 function getOxyColor(type, value) {
@@ -30,8 +30,8 @@ function getOxyColor(type, value) {
 
 function App() {
   const [count, setCount] = useState(0);
-  const { data, error } = useSensorData();
-  // const data = {temperature: 22, light: 21, pH: 7, oxygen: 10} // test data
+  // const { data, error } = useSensorData();
+  const data = {temperature: 22, light: 21, pH: 7, oxygen: 10} // test data
 
   return (
     <div className="min-h-screen bg-[#DDF1FF] font-mont flex flex-col items-center p-4">
